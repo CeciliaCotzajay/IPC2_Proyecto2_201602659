@@ -6,9 +6,21 @@ raizPre = Tk()
 M = MetodosImage()
 
 
+# **********************************************************************************************************************
+# ***************************************** MÉTODOS AUXILIARES *********************************************************
+# **********************************************************************************************************************
+
 def verHTML():
     M.mostrarReporteHTML()
 
+
+def verDocumentacion():
+    M.mostrarDocumentacion()
+
+
+# **********************************************************************************************************************
+# ***************************************** INTERFAZ GRÁFICA ***********************************************************
+# **********************************************************************************************************************
 
 def abrirVentanaPrincipal():
     raizPre.withdraw()
@@ -20,13 +32,12 @@ def abrirVentanaPrincipal():
     raiz.config(relief="sunken")
     raiz.config(cursor="circle")
     # ----------------------------------------------------------------------------------------------------------------------
-    # Frame1 = Frame(raiz)
-    # Frame1.pack()
-    # Frame1.config(width="500", height="350")
-    # Frame1.config(bg="#2980B9")
-    # Frame1.config(bd=15)
-    # Frame1.config(relief="sunken")
-    # Frame1.config(cursor="dot")
+    frameP = Frame(raiz)
+    frameP.pack()
+    frameP.config(width="600", height="300")
+    frameP.config(bg="#2980B9")
+    frameP.config(bd=4)
+    frameP.config(cursor="hand2")
     # ----------------------------------------------------------------------------------------------------------------------
     barraMenu = Menu(raiz)
     raiz.config(menu=barraMenu)
@@ -57,7 +68,7 @@ def abrirVentanaPrincipal():
     reportesMenu.config(fg="#000080", bg="#808B96", font=("Comic Sans MS", 10))
 
     ayudaMenu = Menu(barraMenu, tearoff=0)
-    ayudaMenu.add_command(label="Documentación")
+    ayudaMenu.add_command(label="Documentación", command=verDocumentacion)
     ayudaMenu.add_command(label="Acerca de...", command=abrirVentanaAcercaDe)
     ayudaMenu.config(fg="#000080", bg="#808B96", font=("Comic Sans MS", 10))
 
@@ -66,8 +77,26 @@ def abrirVentanaPrincipal():
     barraMenu.add_cascade(label="Reporte", menu=reportesMenu)
     barraMenu.add_cascade(label="Ayuda", menu=ayudaMenu)
     barraMenu.config(fg="#000080", bg="#808B96", font=("Comic Sans MS", 10))
+    # ------------------------------------------------------------------------------------------------------------------
+    Label(frameP, text="IPC - 2", bg="#D2B4DE", font=("Comic Sans MS", 20)).place(x=270, y=20)
+
+    img01 = PhotoImage(file="img/image1.gif")
+    img1 = img01.subsample(2)
+    labeli1 = Label(frameP, image=img1, width=150, height=150)
+    labeli1.place(x=30, y=90)
+
+    img02 = PhotoImage(file="img/image1.gif")
+    img2 = img02.subsample(2)
+    labeli2 = Label(frameP, image=img2, width=150, height=150)
+    labeli2.place(x=222, y=90)
+
+    img03 = PhotoImage(file="img/image1.gif")
+    img3 = img03.subsample(2)
+    labeli3 = Label(frameP, image=img3, width=150, height=150)
+    labeli3.place(x=415, y=90)
     # ----------------------------------------------------------------------------------------------------------------------
     raiz.mainloop()
+    raizPre.destroy()
 
 
 def abrirVentanaAcercaDe():
@@ -98,7 +127,7 @@ def abrirVentanaAcercaDe():
     Label(FrameAD, text="María Cecilia Cotzajay López", bg="#D2B4DE", font=("Comic Sans MS", 10)).place(x=330, y=175)
     Label(FrameAD, text="201602659", fg="Purple", bg="#D5F5E3", font=("Comic Sans MS", 11)).place(x=370, y=230)
     # ----------------------------------------------------------------------------------------------------------------------
-    botonAcercaDe = Button(raizAcer, text="Cerrar", command=raizAcer.withdraw)
+    botonAcercaDe = Button(raizAcer, text="Cerrar", command=raizAcer.destroy)
     botonAcercaDe.config(fg="Purple", bg="#808B96", font=("Comic Sans MS", 10))
     botonAcercaDe.place(x=250, y=300)
     botonAcercaDe.config(cursor="hand2")
