@@ -9,16 +9,16 @@ class MatrizOrtogonal:
         self.tamFil = f
         self.tamCol = c
         self.tam = 0
-        self.cabeceras = None
+        self.Matriz = None
         self.crearCabeceras()
 
     def crearCabeceras(self):
         if self.tamFil != 0:
-            self.cabeceras = ListaOrtogonal()
+            self.Matriz = ListaOrtogonal()
             contf = 1
             while contf <= self.tamFil:
                 iD = str(contf)+"y"
-                self.cabeceras.insertarY(iD)
+                self.Matriz.insertarY(iD)
                 contf += 1
         else:
             print("El número de filas es 0")
@@ -26,7 +26,7 @@ class MatrizOrtogonal:
             contc = 1
             while contc <= self.tamCol:
                 iD = str(contc) + "x"
-                self.cabeceras.insertarX(iD)
+                self.Matriz.insertarX(iD)
                 contc += 1
         else:
             print("El número de columnas es 0")
@@ -37,8 +37,8 @@ class MatrizOrtogonal:
         idY = str(casilla.posY) + "y"
         idX = str(casilla.posX) + "x"
         nuevo = NodoOrtogonalMatriz(Casilla=casilla)
-        primeroY = self.cabeceras.obtenerCabeceraY(idY)
-        primeroX = self.cabeceras.obtenerCabeceraX(idX)
+        primeroY = self.Matriz.obtenerCabeceraY(idY)
+        primeroX = self.Matriz.obtenerCabeceraX(idX)
         # --------------SI NO HAY NUNGUNO---------------
         if self.tam == 0:
             primeroY.siguiente = nuevo
@@ -120,4 +120,11 @@ class MatrizOrtogonal:
             # -------------------------INSERCCION EN (Y,X)----------------------------
 
     def imprimirMatriz(self):
+        for casilla in self.Matriz:
+            # actualY = casilla.posY
+            # actualX = casilla.posX
+            if casilla.valor is not None:
+                print(casilla.valor)
+
+
 

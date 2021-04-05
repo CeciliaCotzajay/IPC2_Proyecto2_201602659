@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import filedialog, messagebox
 
 from MetodosImage import MetodosImage
 
@@ -16,6 +17,16 @@ def verHTML():
 
 def verDocumentacion():
     M.mostrarDocumentacion()
+
+
+def abrir_cargarArchivo():
+    try:
+        rutaFichero = filedialog.askopenfilename(title="Abrir Archivo", initialdir="C:\\Users\\Maria\\Desktop",
+                                                 filetypes=(
+                                                     ("Ficheros de Texto", "*.txt"), ("Todos los ficheros", "*.*")))
+        M.cargarArchivo(rutaFichero)
+    except:
+        messagebox.showinfo("Abrir Archivo", "No ha Elegido ningún Archivo...")
 
 
 # **********************************************************************************************************************
@@ -43,7 +54,7 @@ def abrirVentanaPrincipal():
     raiz.config(menu=barraMenu)
 
     archivoMenu = Menu(barraMenu, tearoff=0)
-    archivoMenu.add_command(label="Cargar Archivo")
+    archivoMenu.add_command(label="Cargar Archivo", command=abrir_cargarArchivo)
     archivoMenu.add_command(label="Reiniciar")
     archivoMenu.add_separator()
     archivoMenu.add_command(label="Salir", command=raiz.destroy)

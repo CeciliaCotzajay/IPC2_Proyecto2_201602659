@@ -1,8 +1,15 @@
 import webbrowser
+from xml.dom import minidom
 
 
 class MetodosImage:
     cadenaEscritura = ""
+
+    def cargarArchivo(self, pahtArchivo):
+        rutaArchivo = pahtArchivo
+        docXML = minidom.parse(rutaArchivo)
+        matrices = docXML.getElementsByTagName("matrices")[0]
+        listaMatriz = matrices.getElementsByTagName("matriz")
 
     def mostrarDocumentacion(self):
         ruta = str("C:\\Users\\Maria\\Documents\\GitHub\\IPC2_Proyecto2_201602659\\Ensayo-Proyecto2-IPC2.pdf")
