@@ -20,13 +20,14 @@ def verDocumentacion():
 
 
 def abrir_cargarArchivo():
-    try:
-        rutaFichero = filedialog.askopenfilename(title="Abrir Archivo", initialdir="C:\\Users\\Maria\\Desktop",
-                                                 filetypes=(
-                                                     ("Ficheros de Texto", "*.txt"), ("Todos los ficheros", "*.*")))
-        M.cargarArchivo(rutaFichero)
-    except:
-        messagebox.showinfo("Abrir Archivo", "No ha Elegido ningún Archivo...")
+    # try:
+    rutaFichero = filedialog.askopenfilename(title="Abrir Archivo", initialdir="C:\\Users\\Maria\\Desktop",
+                                             filetypes=(
+                                                 ("Ficheros XML", "*.xml"), ("Todos los ficheros", "*.*")))
+    print(rutaFichero)
+    M.cargarArchivo(rutaFichero)
+    # except:
+    #     messagebox.showinfo("Abrir Archivo", "No ha Elegido ningún Archivo...")
 
 
 # **********************************************************************************************************************
