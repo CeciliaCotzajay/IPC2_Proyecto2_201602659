@@ -14,7 +14,7 @@ class ListaSimple:
             self.tam += 1
         else:
             actual = self.primero
-            while actual.siguiente != self.primero:
+            while actual.siguiente:
                 actual = actual.siguiente
             actual.siguiente = nuevo
             self.tam += 1

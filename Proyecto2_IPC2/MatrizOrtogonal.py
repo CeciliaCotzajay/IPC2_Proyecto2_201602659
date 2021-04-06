@@ -19,7 +19,7 @@ class MatrizOrtogonal:
         if self.tamFil != 0:
             contf = 1
             while contf <= self.tamFil:
-                casilla = Casilla(0, contf, "")
+                casilla = Casilla(0, contf, "%")
                 self.Matriz.insertarCabeceraY(casilla)
                 contf += 1
         else:
@@ -27,7 +27,7 @@ class MatrizOrtogonal:
         if self.tamCol != 0:
             contc = 1
             while contc <= self.tamCol:
-                casilla = Casilla(contc, 0, "")
+                casilla = Casilla(contc, 0, "#")
                 self.Matriz.insertarCabeceraX(casilla)
                 contc += 1
         else:

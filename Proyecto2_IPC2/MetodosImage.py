@@ -27,7 +27,7 @@ class MetodosImage:
                 filas = int(fil.firstChild.data)
                 columnas = int(col.firstChild.data)
                 imagen = str(image.firstChild.data)
-                print(imagen)
+                # print(imagen)
                 matrizOrtogonal = MatrizOrtogonal(filas, columnas)
                 lineasImagen = imagen.split('\n')
                 contC = 0
@@ -41,14 +41,38 @@ class MetodosImage:
                                 if c == "*":
                                     casilla = Casilla(contC, contF, "*")
                                     matrizOrtogonal.insertar(casilla)
-                        if contC != columnas:
-                            print("La imagen no tiene el No de columnas establecido!! " + linea + " nombre: " + str(
-                                nombre.firstChild.data))
+                        # if contC != columnas:
+                        #     print("La imagen no tiene el No de columnas establecido!! " + linea + " nombre: " + str(
+                        #         nombre.firstChild.data))
                         contC = 0
-                if contF != filas:
-                    print("La imagen no tiene el No de filas establecido!! " + str(nombre.firstChild.data))
+                # if contF != filas:
+                #     print("La imagen no tiene el No de filas establecido!! " + str(nombre.firstChild.data))
                 contF = 0
-                matrizOrtogonal.imprimirMatriz()
+                self.listaS.insertar(nombre, matrizOrtogonal)
+        self.graficarMatriz()
+
+    def graficarMatriz(self):
+        actualL = self.listaS.primero
+        while actualL is not None:
+            actuaY = actualL.MatrizOrtogonal.primero_Y
+            # while actuaY is not None:
+            #     print(actuaY.Casilla.valor)
+            #     actualY2 = actuaY
+            #     while actualY2 is not None:
+            #         print(actualY2.siguiente.Casilla.valor)
+            #         actualY2 = actualY2.siguiente
+            #     actuaY = actuaY.abajo
+            actualY = actualL.MatrizOrtogonal.primero_Y
+            actualX = actualL.MatrizOrtogonal.primero_X
+            while actualY is not None:
+                print(actualY.Casilla.valor)
+                while actualX is not None:
+                    print(actualX.Casilla.valor)
+                    actualX = actualX.siguiente
+                actualY = actualY.siguiente
+            # ----
+            actualL = actualL.siguiente
+
 
     def mostrarDocumentacion(self):
         ruta = str("C:\\Users\\Maria\\Documents\\GitHub\\IPC2_Proyecto2_201602659\\Ensayo-Proyecto2-IPC2.pdf")
@@ -57,7 +81,7 @@ class MetodosImage:
     def mostrarReporteHTML(self):
         # ---------------------------------------------------------
         # ESTA LINEA SERÁ ELIMINADA Y  SERÁ CONVERTIDA EN PARAMETRO
-        nombre = "hola"
+        nombre = "Reporte"
         # ---------------------------------------------------------
         self.crearArchivo(nombre)
         self.escribirLinea(nombre)
