@@ -40,7 +40,6 @@ class ListaOrtogonal:
             self.tamX += 1
             self.tamG += 1
 
-#
     def obtenerCabeceraY(self, valY):
         cabeceraY = None
         if self.tamY != 0:

@@ -49,6 +49,7 @@ class MetodosImage:
                 #     print("La imagen no tiene el No de filas establecido!! " + str(nombre.firstChild.data))
                 contF = 0
                 self.listaS.insertar(nombre, matrizOrtogonal)
+                
         self.graficarMatriz()
 
     def graficarMatriz(self):
@@ -72,7 +73,6 @@ class MetodosImage:
                 actualY = actualY.siguiente
             # ----
             actualL = actualL.siguiente
-
 
     def mostrarDocumentacion(self):
         ruta = str("C:\\Users\\Maria\\Documents\\GitHub\\IPC2_Proyecto2_201602659\\Ensayo-Proyecto2-IPC2.pdf")
