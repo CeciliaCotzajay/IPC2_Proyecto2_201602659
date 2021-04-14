@@ -1,5 +1,6 @@
 import webbrowser
 from datetime import datetime
+from select import select
 from xml.dom import minidom
 
 from Casilla import Casilla
@@ -41,36 +42,31 @@ class MetodosImage:
                                 if c == "*":
                                     casilla = Casilla(contC, contF, "*")
                                     matrizOrtogonal.insertar(casilla)
-                        # if contC != columnas:
-                        #     print("La imagen no tiene el No de columnas establecido!! " + linea + " nombre: " + str(
-                        #         nombre.firstChild.data))
+                        if contC != columnas and contC != 0:
+                            print("La imagen no tiene el No de columnas establecido!! " + linea + " nombre: " + str(
+                                nombre.firstChild.data))
                         contC = 0
-                # if contF != filas:
-                #     print("La imagen no tiene el No de filas establecido!! " + str(nombre.firstChild.data))
-                contF = 0
+                if contF != filas:
+                    print("La imagen no tiene el No de filas establecido!! " + str(nombre.firstChild.data))
                 self.listaS.insertar(nombre, matrizOrtogonal)
-                
-        self.graficarMatriz()
+                fecha = self.obtenerFechaHora()
+                # linea = """<p>La matriz fue creada: """ + fecha+"""</p><br>"""
+                #self.escribirLinea(nombre, linea)
+                print(str(matrizOrtogonal.tam))
+        # self.graficarMatriz()
 
     def graficarMatriz(self):
         actualL = self.listaS.primero
         while actualL is not None:
+            # ----
             actuaY = actualL.MatrizOrtogonal.primero_Y
-            # while actuaY is not None:
-            #     print(actuaY.Casilla.valor)
-            #     actualY2 = actuaY
-            #     while actualY2 is not None:
-            #         print(actualY2.siguiente.Casilla.valor)
-            #         actualY2 = actualY2.siguiente
-            #     actuaY = actuaY.abajo
-            actualY = actualL.MatrizOrtogonal.primero_Y
-            actualX = actualL.MatrizOrtogonal.primero_X
-            while actualY is not None:
-                print(actualY.Casilla.valor)
-                while actualX is not None:
-                    print(actualX.Casilla.valor)
-                    actualX = actualX.siguiente
-                actualY = actualY.siguiente
+            actuaX = actualL.MatrizOrtogonal.primero_X
+            while actuaY is not None:
+                while actuaY is not None:
+                    print(actuaY.Casilla.valor, end="\t")
+                    actuaY = actuaY.siguiente
+                print("")
+                actuaY = actuaY.abajo
             # ----
             actualL = actualL.siguiente
 

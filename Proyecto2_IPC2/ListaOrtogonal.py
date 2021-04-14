@@ -44,7 +44,7 @@ class ListaOrtogonal:
         cabeceraY = None
         if self.tamY != 0:
             actualY = self.primeroY
-            while actualY.abajo:
+            while actualY is not None:
                 if actualY.Casilla.posY == valY and actualY.Casilla.posX == 0:
                     cabeceraY = actualY
                 actualY = actualY.abajo
@@ -54,7 +54,7 @@ class ListaOrtogonal:
         cabeceraX = None
         if self.tamX != 0:
             actualX = self.primeroX
-            while actualX.siguiente:
+            while actualX is not None:
                 if actualX.Casilla.posX == valX and actualX.Casilla.posY == 0:
                     cabeceraX = actualX
                 actualX = actualX.siguiente

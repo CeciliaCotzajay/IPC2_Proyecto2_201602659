@@ -19,7 +19,7 @@ class MatrizOrtogonal:
         if self.tamFil != 0:
             contf = 1
             while contf <= self.tamFil:
-                casilla = Casilla(0, contf, "%")
+                casilla = Casilla(0, contf, "Y")
                 self.Matriz.insertarCabeceraY(casilla)
                 contf += 1
         else:
@@ -27,7 +27,7 @@ class MatrizOrtogonal:
         if self.tamCol != 0:
             contc = 1
             while contc <= self.tamCol:
-                casilla = Casilla(contc, 0, "#")
+                casilla = Casilla(contc, 0, "X")
                 self.Matriz.insertarCabeceraX(casilla)
                 contc += 1
         else:
@@ -51,75 +51,84 @@ class MatrizOrtogonal:
             self.tam += 1
         else:
             # -------------------------RECORRIDO EN Y---------------------------------
-            actualY = primeroY
-            while actualY is not None:
-                # LOS VALORES DE auxY SON EL TIPO DE OPCIÓN QUE SE ENCUENTRA EN LA
-                # IMAGEN S1.png
-                if valX < actualY.Casilla.posX and actualY.anterior is primeroY:
-                    # auxY = 1
-                    primeroY.siguiente = nuevo
-                    nuevo.anterior = primeroY
+            self.subInserccionY(primeroY, valX, nuevo)
+            # -------------------------RECORRIDO EN X---------------------------------
+            self.subInserccionX(primeroX, valY, nuevo)
+
+    # -------------------------INSERCCION EN (Y,X)----------------------------
+
+    def subInserccionY(self, primeroY, valX, nuevo):
+        # -------------------------RECORRIDO EN Y---------------------------------
+        actualY = primeroY
+        while actualY is not None:
+            # LOS VALORES DE auxY SON EL TIPO DE OPCIÓN QUE SE ENCUENTRA EN LA
+            # IMAGEN S1.png
+            if valX < actualY.Casilla.posX and actualY.anterior is primeroY:
+                # auxY = 1
+                primeroY.siguiente = nuevo
+                nuevo.anterior = primeroY
+                nuevo.siguiente = actualY
+                actualY.anterior = nuevo
+                return
+            elif valX < actualY.Casilla.posX and actualY.anterior is not primeroY:
+                # auxY = 2
+                if valX > actualY.anterior.Casilla.posX:
+                    auxAnterior = actualY.anterior
+                    auxAnterior.siguiente = nuevo
+                    nuevo.anterior = auxAnterior
                     nuevo.siguiente = actualY
                     actualY.anterior = nuevo
                     return
-                elif valX < actualY.Casilla.posX and actualY.anterior is not primeroY:
-                    # auxY = 2
-                    if valX > actualY.anterior.Casilla.posX:
-                        auxAnterior = actualY.anterior
-                        auxAnterior.siguiente = nuevo
-                        nuevo.anterior = auxAnterior
-                        nuevo.siguiente = actualY
-                        actualY.anterior = nuevo
-                        return
-                elif valX > actualY.Casilla.posX and actualY.siguiente is None:
-                    # auxY = 3
-                    actualY.siguiente = nuevo
-                    nuevo.anterior = actualY
-                    return
-                elif actualY.siguiente is None:
-                    # auxY = 4
-                    primeroY.siguiente = nuevo
-                    nuevo.anterior = primeroY
-                    return
-                actualY = actualY.siguiente
-                # -------------------------RECORRIDO EN X---------------------------------
-                actualX = primeroX
-                while actualX is not None:
-                    # LOS VALORES DE auxY SON EL TIPO DE OPCIÓN QUE SE ENCUENTRA EN LA
-                    # IMAGEN S2.png
-                    if valY < actualX.Casilla.posY and actualX.arriba is primeroX:
-                        # auxY = 1
-                        primeroX.abajo = nuevo
-                        nuevo.arriba = primeroX
-                        nuevo.abajo = actualX
-                        actualX.arriba = nuevo
-                        self.tam += 1
-                        return
-                    elif valY < actualX.Casilla.posY and actualX.arriba is not primeroX:
-                        # auxY = 2
-                        if valY > actualX.anterior.Casilla.posY:
-                            auxAnterior = actualX.arriba
-                            auxAnterior.abajo = nuevo
-                            nuevo.arriba = auxAnterior
-                            nuevo.abajo = actualX
-                            actualX.arriba = nuevo
-                            self.tam += 1
-                            return
-                    elif valY > actualX.Casilla.posY and actualX.abajo is None:
-                        # auxY = 3
-                        actualX.abajo = nuevo
-                        nuevo.arriba = actualX
-                        self.tam += 1
-                        return
-                    elif actualX.abajo is None:
-                        # auxY = 4
-                        primeroX.abajo = nuevo
-                        nuevo.arriba = primeroX
-                        self.tam += 1
-                        return
-                    actualX = actualX.abajo
+            elif valX > actualY.Casilla.posX and actualY.siguiente is None:
+                # auxY = 3
+                # aux = actualY.siguiente
+                actualY.siguiente = nuevo
+                nuevo.anterior = actualY
+                return
+            elif actualY.siguiente is None:
+                # auxY = 4
+                primeroY.siguiente = nuevo
+                nuevo.anterior = primeroY
+                return
+            actualY = actualY.siguiente
 
-            # -------------------------INSERCCION EN (Y,X)----------------------------
+    def subInserccionX(self,primeroX, valY, nuevo):
+        actualX = primeroX
+        while actualX is not None:
+            # LOS VALORES DE auxY SON EL TIPO DE OPCIÓN QUE SE ENCUENTRA EN LA
+            # IMAGEN S2.png
+            if valY < actualX.Casilla.posY and actualX.arriba is primeroX:
+                # auxY = 1
+                primeroX.abajo = nuevo
+                nuevo.arriba = primeroX
+                nuevo.abajo = actualX
+                actualX.arriba = nuevo
+                self.tam += 1
+                return
+            elif valY < actualX.Casilla.posY and actualX.arriba is not primeroX:
+                # auxY = 2
+                if valY > actualX.anterior.Casilla.posY:
+                    auxAnterior = actualX.arriba
+                    auxAnterior.abajo = nuevo
+                    nuevo.arriba = auxAnterior
+                    nuevo.abajo = actualX
+                    actualX.arriba = nuevo
+                    self.tam += 1
+                    return
+            elif valY > actualX.Casilla.posY and actualX.abajo is None:
+                # auxY = 3
+                # aux = actualX.abajo
+                actualX.abajo = nuevo
+                nuevo.arriba = actualX
+                self.tam += 1
+                return
+            elif actualX.abajo is None:
+                # auxY = 4
+                primeroX.abajo = nuevo
+                nuevo.arriba = primeroX
+                self.tam += 1
+                return
+            actualX = actualX.abajo
 
     def imprimirMatriz(self):
         actualY = self.primero_Y
